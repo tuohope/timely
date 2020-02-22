@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CalendarService} from './service/calendar.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'timely';
+
+  appReady = false;
+
+  constructor(private calenderService: CalendarService) {
+    this.calenderService.fetchCalendarData().subscribe(res => {
+      this.appReady = true;
+    });
+  }
 }
